@@ -1044,6 +1044,58 @@ if(finePointer && !reducedMotion){
     frameWrap.addEventListener('mouseleave', ()=>{ frame.style.transform = ''; });
   }
 }
+
+  const contactForm = document.getElementById("contactForm");
+const formResult = document.getElementById("form-result");
+
+contactForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const submitButton = contactForm.querySelector(".submit-btn");
+  const formData = new FormData(contactForm);
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Sending...";
+
+  try {
+    const response = await fetch(
+      "https://api.web3forms.com/submit",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const result = await response.json();
+
+    if (result.success) {
+      formResult.textContent = "Message sent successfully! I'll get back to you soon.";
+      formResult.style.display = "block";
+
+      contactForm.reset();
+
+      submitButton.textContent = "Sent ✓";
+
+      setTimeout(() => {
+        submitButton.disabled = false;
+        submitButton.textContent = "Send Message";
+      }, 3000);
+
+    } else {
+      throw new Error(result.message);
+    }
+
+  } catch (error) {
+
+    formResult.textContent =
+      "Something went wrong. Please try again.";
+
+    formResult.style.display = "block";
+
+    submitButton.disabled = false;
+    submitButton.textContent = "Send Message";
+  }
+});
 </script>
 </body>
 </html>
