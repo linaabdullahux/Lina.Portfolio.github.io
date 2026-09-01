@@ -389,10 +389,10 @@ html[data-lang="ar"] .pf-link:hover svg{transform:scaleX(-1) translateX(4px);}
 .exp-org-row{display:flex;align-items:center;gap:10px;margin-top:6px;}
 .org-logo{
   display:inline-flex;align-items:center;justify-content:center;
-  background:#FFFFFF;border-radius:7px;padding:4px 10px;
-  border:1px solid var(--border);flex-shrink:0;
+  border-radius:5px;padding:0.4px 2px;
+  border:3px solid var(--border);flex-shrink:0;
 }
-.org-logo img{height:44px;width:auto;display:block;}
+.org-logo img{height:99px;width:auto;display:block;}
 .exp-desc{font-size:14.5px;color:var(--text-soft);margin-top:8px;}
 .edu-card{
   background:var(--panel-bg);color:var(--panel-text);border-radius:var(--radius);padding:34px;height:fit-content;
