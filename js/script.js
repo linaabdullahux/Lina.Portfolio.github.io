@@ -95,7 +95,7 @@ const translations = {
     "contact.email":"البريد الإلكتروني","contact.phone":"رقم الجوال","contact.location":"الموقع","contact.locvalue":"مكة المكرمة، المملكة العربية السعودية",
     "form.name":"اسمك","form.email":"بريدك الإلكتروني","form.message":"ما الذي تحتاجه؟","form.submit":"إرسال الرسالة",
     "form.note":"سيفتح هذا تطبيق البريد لديك مع تعبئة الرسالة تلقائيًا، موجهة إلى linaalasmari4@gmail.com.",
-    "footer.copy":"© 2026 لينا عبدالله · صُمم بعناية"
+    "footer.copy":"© 2026 لينا عبدالله"
   }
 };
 
