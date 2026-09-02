@@ -159,8 +159,44 @@ const io = new IntersectionObserver((entries)=>{
 }, {threshold:0.15});
 revealEls.forEach(el=>io.observe(el));
 
-// Contact form is submitted directly to FormSubmit via the HTML form action.
-// No mail app is required. The first submission triggers FormSubmit email verification.
+/* ---------- CONTACT FORM ---------- */
+const contactForm = document.getElementById('contactForm');
+const formStatus = document.getElementById('formStatus');
+
+if(contactForm && formStatus){
+  contactForm.addEventListener('submit', async (event)=>{
+    event.preventDefault();
+
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const currentLang = document.documentElement.getAttribute('data-lang') || 'en';
+    const originalText = submitButton.textContent;
+
+    submitButton.disabled = true;
+    submitButton.textContent = currentLang === 'ar' ? 'جارٍ الإرسال...' : 'Sending...';
+    formStatus.className = 'form-note';
+    formStatus.textContent = currentLang === 'ar' ? 'جارٍ إرسال رسالتك...' : 'Sending your message...';
+
+    try{
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: new FormData(contactForm),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if(!response.ok) throw new Error('Form submission failed');
+
+      contactForm.reset();
+      formStatus.className = 'form-note form-success';
+      formStatus.textContent = translations[currentLang]['form.success'];
+    }catch(error){
+      formStatus.className = 'form-note form-error';
+      formStatus.textContent = translations[currentLang]['form.error'];
+    }finally{
+      submitButton.disabled = false;
+      submitButton.textContent = translations[currentLang]['form.submit'] || originalText;
+    }
+  });
+}
 
 /* ---------- DARK / LIGHT MODE ---------- */
 function applyTheme(theme){

@@ -433,7 +433,10 @@ html[data-lang="ar"] .pf-link:hover svg{transform:scaleX(-1) translateX(4px);}
 }
 .form-row input:focus, .form-row textarea:focus{outline:none;border-color:var(--teal);}
 .form-row textarea{resize:vertical;min-height:110px;}
-.form-note{font-size:12.5px;color:var(--text-soft);margin-top:14px;}
+.form-note{font-size:12.5px;color:var(--text-soft);margin-top:14px;min-height:18px;}
+.form-success{color:#198754;font-weight:600;}
+.form-error{color:#c0392b;font-weight:600;}
+.submit-btn:disabled{opacity:.7;cursor:not-allowed;}
 .submit-btn{width:100%;justify-content:center;margin-top:6px;}
 
 /* ---------- FOOTER ---------- */
