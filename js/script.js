@@ -159,53 +159,8 @@ const io = new IntersectionObserver((entries)=>{
 }, {threshold:0.15});
 revealEls.forEach(el=>io.observe(el));
 
-// contact form -> direct email via FormSubmit (no mail app required)
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-  contactForm.addEventListener('submit', async function(e){
-    e.preventDefault();
-
-    const button = contactForm.querySelector('.submit-btn');
-    const status = document.getElementById('formStatus');
-    const lang = document.documentElement.getAttribute('data-lang');
-    const originalButtonText = button.textContent;
-
-    button.disabled = true;
-    button.style.opacity = '0.7';
-    button.textContent = lang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
-
-    const formData = new FormData(contactForm);
-    formData.append('_subject', lang === 'ar'
-      ? `رسالة من ${formData.get('name')} عبر البورتفوليو`
-      : `Portfolio message from ${formData.get('name')}`);
-    formData.append('_replyto', formData.get('email'));
-    formData.append('_captcha', 'false');
-
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/linaalasmari4@gmail.com', {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (!response.ok) throw new Error('Form submission failed');
-
-      contactForm.reset();
-      status.textContent = lang === 'ar'
-        ? 'تم إرسال رسالتك بنجاح! سأرد عليك عبر البريد الإلكتروني.'
-        : "Message sent successfully! I'll get back to you by email.";
-      status.style.opacity = '1';
-    } catch (error) {
-      status.textContent = lang === 'ar'
-        ? 'حدث خطأ أثناء الإرسال. حاولي مرة أخرى أو راسليني مباشرة عبر البريد الإلكتروني.'
-        : 'Something went wrong. Please try again or email me directly.';
-    } finally {
-      button.disabled = false;
-      button.style.opacity = '';
-      button.textContent = originalButtonText;
-    }
-  });
-}
+// Contact form is submitted directly to FormSubmit via the HTML form action.
+// No mail app is required. The first submission triggers FormSubmit email verification.
 
 /* ---------- DARK / LIGHT MODE ---------- */
 function applyTheme(theme){

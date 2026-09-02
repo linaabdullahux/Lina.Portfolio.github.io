@@ -264,7 +264,7 @@
       </div>
     </div>
 
-    <form class="contact-form" id="contactForm" data-reveal>
+    <form class="contact-form" id="contactForm" action="https://formsubmit.co/linaalasmari4@gmail.com" method="POST" data-reveal>
       <div class="form-row">
         <label data-i18n="form.name">Your Name</label>
         <input type="text" id="f-name" name="name" autocomplete="name" required>
@@ -279,6 +279,9 @@
       </div>
       <button type="submit" class="btn btn-primary submit-btn" data-i18n="form.submit">Send Message</button>
       <p class="form-note" id="formStatus" data-i18n="form.note">Your message will be sent directly to my email.</p>
+      <input type="hidden" name="_subject" value="New Portfolio Message">
+      <input type="hidden" name="_next" value="https://linaalasmari.github.io/#contact">
+      <input type="hidden" name="_captcha" value="false">
       <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" aria-hidden="true">
     </form>
   </div>
