@@ -177,13 +177,24 @@ if(contactForm && formStatus){
     formStatus.textContent = currentLang === 'ar' ? 'جارٍ إرسال رسالتك...' : 'Sending your message...';
 
     try{
+      // FormSubmit AJAX endpoint: keeps the visitor on the same page.
+      const formData = Object.fromEntries(new FormData(contactForm).entries());
+      // Make Reply in the received email go directly to the visitor's email.
+      formData._replyto = formData.email;
+
       const response = await fetch(contactForm.action, {
         method: 'POST',
-        body: new FormData(contactForm),
-        headers: { 'Accept': 'application/json' }
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
       });
 
-      if(!response.ok) throw new Error('Form submission failed');
+      const result = await response.json().catch(() => ({}));
+      if(!response.ok || result.success === false) {
+        throw new Error(result.message || 'Form submission failed');
+      }
 
       contactForm.reset();
       formStatus.className = 'form-note form-success';
