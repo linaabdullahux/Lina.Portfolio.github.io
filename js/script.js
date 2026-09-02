@@ -45,7 +45,9 @@ const translations = {
     "contact.sub":"Open to UX/UI, HCI and front-end internships or freelance projects. Send a message and I'll get back to you by email.",
     "contact.email":"Email","contact.phone":"Phone","contact.location":"Location","contact.locvalue":"Makkah, Saudi Arabia",
     "form.name":"Your Name","form.email":"Your Email","form.message":"Tell me what do you need?","form.submit":"Send Message",
-    "form.note":"This opens your email app with the message pre-filled, addressed to linaalasmari4@gmail.com.",
+    "form.note":"Your message will be sent directly to my email.",
+    "form.success":"Message sent successfully! I'll get back to you by email.",
+    "form.error":"Something went wrong. Please try again or email me directly.",
     "footer.copy":"© 2026 Lina Abdullah"
   },
   ar:{
@@ -94,7 +96,9 @@ const translations = {
     "contact.sub":"متاحة لفرص تدريب أو توظيف في UX/UI وHCI والواجهات الأمامية. أرسل رسالتك وسأرد عليك عبر البريد الإلكتروني.",
     "contact.email":"البريد الإلكتروني","contact.phone":"رقم الجوال","contact.location":"الموقع","contact.locvalue":"مكة المكرمة، المملكة العربية السعودية",
     "form.name":"اسمك","form.email":"بريدك الإلكتروني","form.message":"ما الذي تحتاجه؟","form.submit":"إرسال الرسالة",
-    "form.note":"سيفتح هذا تطبيق البريد لديك مع تعبئة الرسالة تلقائيًا، موجهة إلى linaalasmari4@gmail.com.",
+    "form.note":"ستُرسل رسالتك مباشرة إلى بريدي الإلكتروني.",
+    "form.success":"تم إرسال رسالتك بنجاح! سأرد عليك عبر البريد الإلكتروني.",
+    "form.error":"حدث خطأ أثناء الإرسال. حاولي مرة أخرى أو راسليني مباشرة عبر البريد الإلكتروني.",
     "footer.copy":"© 2026 لينا عبدالله"
   }
 };
@@ -155,19 +159,53 @@ const io = new IntersectionObserver((entries)=>{
 }, {threshold:0.15});
 revealEls.forEach(el=>io.observe(el));
 
-// contact form -> mailto
-document.getElementById('contactForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const name = document.getElementById('f-name').value;
-  const email = document.getElementById('f-email').value;
-  const message = document.getElementById('f-message').value;
-  const lang = document.documentElement.getAttribute('data-lang');
-  const subject = lang === 'ar' ? `رسالة من ${name} عبر الموقع الشخصي` : `Portfolio message from ${name}`;
-  const body = (lang === 'ar'
-    ? `الاسم: ${name}\nالبريد الإلكتروني: ${email}\n\nالرسالة:\n${message}`
-    : `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-  window.location.href = `mailto:linaalasmari4@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-});
+// contact form -> direct email via FormSubmit (no mail app required)
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+  contactForm.addEventListener('submit', async function(e){
+    e.preventDefault();
+
+    const button = contactForm.querySelector('.submit-btn');
+    const status = document.getElementById('formStatus');
+    const lang = document.documentElement.getAttribute('data-lang');
+    const originalButtonText = button.textContent;
+
+    button.disabled = true;
+    button.style.opacity = '0.7';
+    button.textContent = lang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
+
+    const formData = new FormData(contactForm);
+    formData.append('_subject', lang === 'ar'
+      ? `رسالة من ${formData.get('name')} عبر البورتفوليو`
+      : `Portfolio message from ${formData.get('name')}`);
+    formData.append('_replyto', formData.get('email'));
+    formData.append('_captcha', 'false');
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/linaalasmari4@gmail.com', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (!response.ok) throw new Error('Form submission failed');
+
+      contactForm.reset();
+      status.textContent = lang === 'ar'
+        ? 'تم إرسال رسالتك بنجاح! سأرد عليك عبر البريد الإلكتروني.'
+        : "Message sent successfully! I'll get back to you by email.";
+      status.style.opacity = '1';
+    } catch (error) {
+      status.textContent = lang === 'ar'
+        ? 'حدث خطأ أثناء الإرسال. حاولي مرة أخرى أو راسليني مباشرة عبر البريد الإلكتروني.'
+        : 'Something went wrong. Please try again or email me directly.';
+    } finally {
+      button.disabled = false;
+      button.style.opacity = '';
+      button.textContent = originalButtonText;
+    }
+  });
+}
 
 /* ---------- DARK / LIGHT MODE ---------- */
 function applyTheme(theme){

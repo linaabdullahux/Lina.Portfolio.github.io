@@ -267,18 +267,19 @@
     <form class="contact-form" id="contactForm" data-reveal>
       <div class="form-row">
         <label data-i18n="form.name">Your Name</label>
-        <input type="text" id="f-name" required>
+        <input type="text" id="f-name" name="name" autocomplete="name" required>
       </div>
       <div class="form-row">
         <label data-i18n="form.email">Your Email</label>
-        <input type="email" id="f-email" required>
+        <input type="email" id="f-email" name="email" autocomplete="email" required>
       </div>
       <div class="form-row">
         <label data-i18n="form.message">Tell me what do you need?</label>
-        <textarea id="f-message" required></textarea>
+        <textarea id="f-message" name="message" required></textarea>
       </div>
       <button type="submit" class="btn btn-primary submit-btn" data-i18n="form.submit">Send Message</button>
-      <p class="form-note" data-i18n="form.note">This opens your email app with the message pre-filled, addressed to linaalasmari4@gmail.com.</p>
+      <p class="form-note" id="formStatus" data-i18n="form.note">Your message will be sent directly to my email.</p>
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;height:0;width:0" aria-hidden="true">
     </form>
   </div>
 </section>
