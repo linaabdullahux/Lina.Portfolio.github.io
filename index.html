@@ -32,6 +32,7 @@
   </div>
 </header>
 <div class="scroll-progress" id="scrollProgress"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
 <div class="cursor-ring" id="cursorRing"></div>
 
 <main id="hero">
@@ -40,33 +41,20 @@
 <section class="hero" style="padding-bottom:0;">
   <div class="hero-grid">
     <div>
-      <div class="hero-badge"><span class="pulse"></span><span data-i18n="hero.badge">Open for internships &amp; freelance</span></div>
-      <h1><span data-i18n="hero.hi">Lina Abdullah</span></h1>
-      <div class="role" data-i18n="hero.role">UX/UI Designer &amp; Front-End Developer</div>
-      <p class="lede" data-i18n="hero.lede">Software Engineering student at Umm Al-Qura University, designing user-centered digital experiences at the intersection of HCI, UX/UI and front-end development.</p>
+      <div class="hero-badge"><span class="pulse"></span><span data-i18n="hero.badge">Open for Work</span></div>
+      <h1 class="hello"><span data-i18n="hero.hi">Hello</span><span class="wave">👋</span></h1>
+      <p class="intro" data-i18n="hero.intro">I'm Lina, a software developer and designer for the ideal user experience</p>
+      <div class="role" data-i18n="hero.role">Welcome, glad you're here!</div>
+      <p class="lede" data-i18n="hero.lede">Software Engineering student at Umm Al-Qura University. I turn ideas into designs, then into code that actually works.</p>
       <div class="hero-ctas">
         <a href="#projects" class="btn btn-primary" data-i18n="hero.cta1">View My Work</a>
         <a href="#contact" class="btn btn-outline" data-i18n="hero.cta2">Get In Touch</a>
       </div>
     </div>
-    <div class="frame-wrap">
-      <div class="design-frame">
-        <span class="frame-tag">Frame 01 — Portfolio</span>
-        <span class="frame-dim">375 × 812</span>
-        <span class="handle tl"></span><span class="handle tr"></span>
-        <span class="handle bl"></span><span class="handle br"></span>
-        <div class="frame-content">
-          <div class="avatar-mark">LA</div>
-          <div class="fname">Lina Abdullah</div>
-          <div class="frole" data-i18n="hero.frame.role">UX/UI · Front-End</div>
-          <div class="frame-bars">
-            <div class="bar"><span></span></div>
-            <div class="bar"><span></span></div>
-            <div class="bar"><span></span></div>
-          </div>
-        </div>
-        <svg class="cursor-dot" viewBox="0 0 24 24" fill="none"><path d="M4 3L20 11L12.5 12.5L11 20L4 3Z" fill="currentColor" stroke="#0D2E27" stroke-width="1"/></svg>
-      </div>
+    <div class="star-stage" aria-hidden="true">
+      <div class="orbit"><span class="oc" style="--a:0deg"><i>&lt;/&gt;</i></span><span class="oc" style="--a:60deg"><i>{ }</i></span><span class="oc" style="--a:120deg"><i>Figma</i></span><span class="oc" style="--a:180deg"><i>git push</i></span><span class="oc" style="--a:240deg"><i>UX</i></span><span class="oc" style="--a:300deg"><i>npm run dev</i></span></div>
+      <svg class="big-star" viewBox="-50 -50 100 100"><defs><linearGradient id="sg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E8A72"/><stop offset="1" stop-color="#E2A63B"/></linearGradient></defs><path d="M0-46C4-14 14-4 46 0 14 4 4 14 0 46-4 14-14 4-46 0-14-4-4-14 0-46Z" fill="url(#sg)"/></svg>
+      <div class="term"><span class="prompt">&gt;</span> <span id="typed"></span><span class="caret"></span></div>
     </div>
   </div>
   <div class="scroll-cue"><span data-i18n="hero.scroll">Scroll</span><span class="line"></span></div>
@@ -77,6 +65,8 @@
   <div class="stat"><div class="num" data-target="6" data-pad="true">00</div><div class="lbl" data-i18n="stats.months">Months Field Exp.</div></div>
   <div class="stat"><div class="num" data-target="10" data-suffix="+">0</div><div class="lbl" data-i18n="stats.tools">Tools &amp; Skills</div></div>
 </div>
+
+<div class="ticker" aria-hidden="true"><div class="tk"><span>Figma ✦ React ✦ HTML ✦ CSS ✦ JavaScript ✦ UX Research ✦ Prototyping ✦ Full-Stack ✦ Git ✦ Accessibility ✦ </span><span>Figma ✦ React ✦ HTML ✦ CSS ✦ JavaScript ✦ UX Research ✦ Prototyping ✦ Full-Stack ✦ Git ✦ Accessibility ✦ </span></div></div>
 
 <!-- ================= ABOUT ================= -->
 <section id="about">
@@ -126,17 +116,19 @@
     <p data-i18n="skills.sub">A toolkit spanning research-driven design, front-end craft, and structured project delivery.</p>
   </div>
   <div class="skills-grid">
-    <div class="skill-card" data-reveal>
+    <div class="skill-card clickable" data-reveal data-modal="m1" role="button" tabindex="0">
       <div class="skill-num">01</div>
       <h3 data-i18n="skills.c1.title">UX/UI Design</h3>
       <p data-i18n="skills.c1.desc">User research, wireframing, prototyping and usability testing to design interfaces centered on real user needs.</p>
       <div class="chip-row"><span class="chip">Figma</span><span class="chip" data-i18n="skills.chip.research">User Research</span><span class="chip" data-i18n="skills.chip.proto">Prototyping</span></div>
+      <div class="open-hint" data-i18n="skills.open">Click to explore →</div>
     </div>
-    <div class="skill-card" data-reveal>
+    <div class="skill-card clickable" data-reveal data-modal="m2" role="button" tabindex="0">
       <div class="skill-num">02</div>
       <h3 data-i18n="skills.c2.title">Front-End Development</h3>
       <p data-i18n="skills.c2.desc">Turning designs into clean, responsive interfaces with semantic markup and structured styling.</p>
       <div class="chip-row"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
+      <div class="open-hint" data-i18n="skills.open">Click to explore →</div>
     </div>
     <div class="skill-card" data-reveal>
       <div class="skill-num">03</div>
@@ -144,11 +136,12 @@
       <p data-i18n="skills.c3.desc">Planning and coordinating project work using recognized project management frameworks and standards.</p>
       <div class="chip-row"><span class="chip">PMP</span><span class="chip">PMBOK</span><span class="chip">PM</span></div>
     </div>
-    <div class="skill-card" data-reveal>
+    <div class="skill-card clickable" data-reveal data-modal="m4" role="button" tabindex="0">
       <div class="skill-num">04</div>
       <h3 data-i18n="skills.c4.title">Interface &amp; App Development</h3>
       <p data-i18n="skills.c4.desc">Building functional application concepts and web interfaces, applying HCI and accessibility principles throughout.</p>
       <div class="chip-row"><span class="chip" data-i18n="skills.chip.hci">HCI</span><span class="chip" data-i18n="skills.chip.access">Accessibility</span><span class="chip" data-i18n="skills.chip.journey">User Journeys</span></div>
+      <div class="open-hint" data-i18n="skills.open">Click to explore →</div>
     </div>
   </div>
 </section>
@@ -172,6 +165,10 @@
       <p data-i18n="projects.featured.p2">During this phase, we studied the problem in depth, conducted user research, analyzed needs, and built and tested early-stage designs, laying the groundwork for the project's next phase.</p>
       <div class="chip-row" style="margin-bottom:6px;">
         <span class="chip" data-i18n="skills.chip.research">User Research</span><span class="chip">Figma</span><span class="chip" data-i18n="projects.chip.ucd">User-Centered Design</span>
+      </div>
+      <div class="pf-actions">
+        <a class="btn btn-primary" href="https://shamlplus-prmqdq.my.canva.site/" target="_blank" rel="noopener" data-i18n="projects.shaml.site">Explore the work on Canva</a>
+        <a class="btn btn-outline" href="assets/files/Shaml-Graduation-Presentation.pptx" download data-i18n="projects.shaml.deck">Download Shaml presentation</a>
       </div>
     </div>
   </div>
@@ -288,6 +285,11 @@
 </section>
 
 </main>
+
+<div class="modal" id="m1" aria-hidden="true"><div class="modal-box" role="dialog" aria-modal="true"><button class="modal-x" type="button" aria-label="close">&times;</button><h3 data-i18n="skills.c1.title">UX/UI Design</h3><p data-i18n="m1.desc">Pick a project to open its interactive prototype in Figma.</p><a class="modal-link" href="https://www.figma.com/proto/L5nrTNz1IqU1rsHuyOHDGY/Untitled?node-id=105-1189&viewport=2102%2C26%2C0.45&t=FBXur49Ij241ets0-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=19%3A24&page-id=0%3A1" target="_blank" rel="noopener"><span data-i18n="m1.a">Liwan Arob service evaluation survey — UI</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="modal-link" href="https://www.figma.com/proto/L5nrTNz1IqU1rsHuyOHDGY/Untitled?node-id=260-227&viewport=2102%2C26%2C0.45&t=FBXur49Ij241ets0-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=19%3A24&page-id=0%3A1" target="_blank" rel="noopener"><span data-i18n="m1.b">Liwan meeting rooms booking website — UI</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div>
+<div class="modal" id="m2" aria-hidden="true"><div class="modal-box" role="dialog" aria-modal="true"><button class="modal-x" type="button" aria-label="close">&times;</button><h3 data-i18n="skills.c2.title">Front-End Development</h3><p data-i18n="m2.desc">I coded the Liwan Arob service evaluation survey interfaces. Try the live version.</p><a class="modal-link" href="https://linaabdullahux.github.io/LiwanArob-Customer-Service-Evaluation-Survey/" target="_blank" rel="noopener"><span data-i18n="m2.a">Open the developed survey interface</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></div>
+<div class="modal" id="m4" aria-hidden="true"><div class="modal-box" role="dialog" aria-modal="true"><button class="modal-x" type="button" aria-label="close">&times;</button><h3 data-i18n="skills.c4.title">Interface &amp; App Development</h3><div class="m-kicker">Liwan Arob — Meeting Rooms Booking</div><p data-i18n="m4.desc">A meeting rooms reservation system for Liwan Arob: instant online booking 24/7, automatic email confirmations and reminders, and an admin dashboard with live analytics, all built with the company's own brand identity. It replaced a paid tool with a system the company fully owns, on 100% free infrastructure built end to end.</p><a class="modal-link" href="https://liwan-booking.pages.dev/?lang=ar" target="_blank" rel="noopener"><span data-i18n="m4.a">Open the booking website</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><img class="m-img" style="margin-top:18px" src="assets/images/liwan-booking.png" alt="Liwan Arob meeting rooms booking system screens" loading="lazy"></div></div>
+
 
 <footer>
   <div data-i18n="footer.copy">© 2026 Lina Abdullah</div>
