@@ -522,7 +522,12 @@ html[data-lang="ar"] .open-hint{direction:rtl;}
 .modal-link{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 18px;margin-top:10px;border:1.5px solid var(--teal);border-radius:12px;font-weight:600;color:var(--teal);transition:.25s;}
 .modal-link:hover{background:var(--teal);color:#fff;transform:translateY(-2px);}
 html[data-lang="ar"] .modal-link svg{transform:scaleX(-1);}
-@media(max-width:980px){.star-stage{max-width:320px;margin-top:30px}.oc i{font-size:11px}}
+@media(max-width:980px){
+  .star-stage{max-width:320px;margin-top:30px}
+  .oc i{font-size:11px}
+  .oc{transform:rotate(var(--a)) translateX(128px) rotate(calc(-1*var(--a)));}
+  html,body{overflow-x:hidden;max-width:100vw;}
+}
 @media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none}.frame-wrap,.design-frame{transition:none!important}}
 
 
