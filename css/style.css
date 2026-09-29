@@ -358,7 +358,7 @@ html[data-lang="ar"] .pf-link svg{transform:scaleX(-1);}
 .pf-link:hover svg{transform:translateX(4px);}
 html[data-lang="ar"] .pf-link:hover svg{transform:scaleX(-1) translateX(4px);}
 
-.projects-more{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.projects-more{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
 .project-card{
   border:1px solid var(--border);border-radius:var(--radius);padding:26px;background:var(--bg);
   transition:.3s;
@@ -479,7 +479,7 @@ footer .f-socials a:hover{color:var(--teal);}
 
 /* ================= VIBE UPGRADE ================= */
 #stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-header,main,footer{position:relative;z-index:2;} header{position:fixed;}
+main,footer{position:relative;z-index:1;} header{position:fixed;z-index:150;}
 #about,#projects{background:color-mix(in srgb,var(--surface) 84%,transparent);}
 .hero h1.hello{font-size:clamp(46px,6.6vw,84px);display:flex;align-items:center;gap:14px;
   background:linear-gradient(100deg,var(--text) 30%,var(--teal-light) 70%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
@@ -492,7 +492,7 @@ header,main,footer{position:relative;z-index:2;} header{position:fixed;}
 .star-stage{position:relative;width:100%;max-width:440px;aspect-ratio:1;margin:auto;display:flex;align-items:center;justify-content:center;}
 .big-star{width:46%;filter:drop-shadow(0 0 28px rgba(226,166,59,.55));animation:starspin 14s linear infinite,starpulse 3.2s ease-in-out infinite;}
 @keyframes starspin{to{rotate:360deg}} @keyframes starpulse{50%{scale:1.14}}
-.orbit{position:absolute;inset:0;animation:starspin 34s linear infinite;border:1px dashed var(--border);border-radius:50%;}
+.orbit{position:absolute;inset:0;animation:starspin 22s linear infinite;border:1px dashed var(--border);border-radius:50%;}
 .oc{position:absolute;top:50%;left:50%;transform:rotate(var(--a)) translateX(min(200px,44vw)) rotate(calc(-1*var(--a)));}
 .oc i{display:block;font:500 12px var(--font-mono);font-style:normal;padding:6px 11px;border-radius:8px;white-space:nowrap;translate:-50% -50%;
   background:var(--surface);color:var(--teal);border:1px solid var(--teal);box-shadow:0 8px 20px -10px rgba(20,107,90,.5);animation:starspin 34s linear infinite reverse;}
@@ -501,7 +501,7 @@ header,main,footer{position:relative;z-index:2;} header{position:fixed;}
 .term .prompt{color:var(--gold);} .caret{display:inline-block;width:7px;height:14px;background:var(--gold);margin-inline-start:3px;vertical-align:-2px;animation:blink 1s steps(1) infinite;}
 @keyframes blink{50%{opacity:0}}
 .ticker{overflow:hidden;border-bottom:1px solid var(--border);background:var(--panel-bg);color:var(--gold-soft);direction:ltr;}
-.tk{display:flex;width:max-content;animation:tick 32s linear infinite;font:500 13px var(--font-mono);letter-spacing:.08em;padding:13px 0;}
+.tk{display:flex;width:max-content;animation:tick 18s linear infinite;font:500 13px var(--font-mono);letter-spacing:.08em;padding:13px 0;}
 .tk span{white-space:pre;padding-right:6px;} @keyframes tick{to{transform:translateX(-50%)}}
 [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);}
 [data-reveal].in{opacity:1;transform:none;}
@@ -523,4 +523,40 @@ html[data-lang="ar"] .open-hint{direction:rtl;}
 .modal-link:hover{background:var(--teal);color:#fff;transform:translateY(-2px);}
 html[data-lang="ar"] .modal-link svg{transform:scaleX(-1);}
 @media(max-width:980px){.star-stage{max-width:320px;margin-top:30px}.oc i{font-size:11px}}
-@media(prefers-reduced-motion:reduce){*{animation:none!important}[data-reveal]{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none}.frame-wrap,.design-frame{transition:none!important}}
+
+
+/* ================= SKILLS BAND (v2) ================= */
+.skills-band{
+  position:relative;overflow:hidden;border-radius:var(--radius);
+  border:1px solid var(--border);background:var(--surface);padding:34px 8px;
+}
+.skills-band::after{
+  content:"";position:absolute;top:0;bottom:0;width:55%;
+  background:linear-gradient(100deg,transparent 20%,rgba(226,166,59,.22) 45%,rgba(20,138,114,.28) 55%,transparent 80%);
+  animation:sweep 6s ease-in-out infinite;pointer-events:none;
+}
+@keyframes sweep{0%{left:-60%}100%{left:110%}}
+.skills-band-inner{display:flex;flex-wrap:wrap;gap:12px 14px;justify-content:center;position:relative;z-index:1;}
+.skill-chip{
+  font-family:var(--font-mono);font-size:13.5px;color:var(--teal);
+  background:rgba(20,107,90,.08);border:1px solid var(--border);
+  padding:9px 16px;border-radius:30px;white-space:nowrap;
+  transition:transform .2s,border-color .2s,background .2s;
+}
+.skill-chip:hover{transform:translateY(-3px);border-color:var(--teal);background:rgba(20,107,90,.14);}
+
+/* ================= PROJECT CARD LINKS (v2) ================= */
+.card-links{display:flex;flex-direction:column;gap:9px;margin-top:6px;}
+.card-link{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:11px 14px;border:1px solid var(--border);border-radius:9px;
+  font-size:13.5px;font-weight:600;color:var(--teal);transition:.22s;
+}
+.card-link:hover{border-color:var(--teal);background:rgba(20,107,90,.08);transform:translateY(-1px);}
+html[data-lang="ar"] .card-link svg{transform:scaleX(-1);}
+.project-featured.alt{grid-template-columns:1.15fr 0.85fr;}
+.project-featured.alt .pf-media{order:2;}
+.project-featured.alt .pf-body{order:1;}
+.project-featured.alt .pf-media img{max-height:none;width:100%;border-radius:10px;}
+@media(max-width:980px){.project-featured.alt{grid-template-columns:1fr;}.project-featured.alt .pf-media{order:0;}.project-featured.alt .pf-body{order:1;}}
