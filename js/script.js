@@ -69,7 +69,7 @@ const translations = {
     "typed":"figma → code|git commit -m \"ship it ✦\"|npm run ux|const vibe = \"coding\";"
   },
   ar:{
-    "logo":"لينا.dev",
+    "logo":"lina.dev",
     "nav.about":"نبذة عني","nav.skills":"مهاراتي","nav.projects":"مشاريعي","nav.experience":"خبراتي","nav.contact":"تواصل معي",
     "hero.badge":"متاحة للتوظيف",
     "hero.hi":"أهلاً",
